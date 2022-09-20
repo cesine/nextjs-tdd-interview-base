@@ -22,6 +22,16 @@ export function getBrand(req: NextRequest) {
   return 'sapin';
 }
 
+// See "Matching Paths" below to learn more
+export const config = {
+  /*
+   * Match all request paths except for the ones starting with:
+   * - api (API routes)
+   * - static (static files)
+   * - favicon.ico (favicon file)
+   */
+  matcher: '/((?!api|static|favicon.ico|_next).*)',
+}
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
