@@ -1,12 +1,14 @@
 import { Layout, Link, Page, Text } from '@vercel/examples-ui'
 import { useBrand } from '@hooks/useBrand';
+import { Skeleton } from '@mui/material';
 import { useProducts } from '@hooks/useProducts';
 
 type Props = {
   color: string;
 };
 
-export default function Home({ color}: Props) {
+
+export default function Home({ color }: Props) {
   const brand = useBrand();
   const { data: { products } = { products: []}, error } = useProducts();
   return (
@@ -18,7 +20,8 @@ export default function Home({ color}: Props) {
         <Link href='/about'>About</Link> us
       </Text>
       <Text className="text-lg mb-4">
-        Welcome to <b>brand {brand.toUpperCase()}</b> {error ? error.message : products.map(({name}) => name).join(', ')}.
+        Welcome to {brand ? <b>{brand.toUpperCase()}</b> : <Skeleton variant="text" width="20"/>}&nbsp;
+        {error ? error.message : products.map(({name}) => name).join(', ')}
       </Text>
     </Page>
   )

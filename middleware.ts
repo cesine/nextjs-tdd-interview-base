@@ -5,7 +5,7 @@ import { COOKIE_NAME } from '@lib/constants';
 import { NextURL } from 'next/dist/server/web/next-url';
 
 export function getBrand(req: NextRequest) {
-  let override = req.nextUrl.searchParams.get(COOKIE_NAME) || req.cookies[COOKIE_NAME];
+  let override = req.nextUrl.searchParams.get(COOKIE_NAME) || req.cookies.get(COOKIE_NAME);
 
   const host = req.headers.get('host') || '';
   const brand = BRANDS.find((b) => host.includes(b));
@@ -22,6 +22,16 @@ export function getBrand(req: NextRequest) {
   return 'sapin';
 }
 
+// See "Matching Paths" below to learn more
+export const config = {
+  /*
+   * Match all request paths except for the ones starting with:
+   * - api (API routes)
+   * - static (static files)
+   * - favicon.ico (favicon file)
+   */
+  matcher: '/((?!api|static|favicon.ico|_next).*)',
+}
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -41,8 +51,8 @@ export function middleware(req: NextRequest) {
   const res = NextResponse.rewrite(updatedUrl)
 
   // Add the brand to cookies if it's not there or it doesnt match the desired brand
-  if (!req.cookies[COOKIE_NAME] || req.cookies[COOKIE_NAME] !== brand) {
-    res.cookie(COOKIE_NAME, brand)
+  if (!req.cookies.get(COOKIE_NAME) || req.cookies.get(COOKIE_NAME) !== brand) {
+    res.cookies.set(COOKIE_NAME, brand)
   }
 
   return res;

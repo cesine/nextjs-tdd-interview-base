@@ -22,7 +22,7 @@ export default function Custom404() {
   return (
     <Page>
       <Head>
-        <title>{brand} Not Found</title>
+        <title>Not Found</title>
         <meta
           name="description"
           content="Vercel example how to use multi-brand custom not found"

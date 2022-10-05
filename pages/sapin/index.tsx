@@ -1,6 +1,6 @@
 import type { NextApiRequest } from 'next'
 import { Layout, Link, Page, Text } from '@vercel/examples-ui'
-import { useBrand } from '@hooks/useBrand';
+// import { useBrand } from '@hooks/useBrand';
 
 type Product = {
   id: string;
@@ -8,12 +8,13 @@ type Product = {
   brand: string;
 };
 type Props = {
+  brand: string;
   color: string;
   products: Product[];
 };
 
-export default function Home({ color, products }: Props) {
-  const brand = useBrand();
+export default function Home({ brand, color, products }: Props) {
+  // const brand = useBrand();
 
   return (
     <Page>
@@ -36,9 +37,9 @@ export default function Home({ color, products }: Props) {
 
 Home.Layout = Layout
 
-export async function getServerSideProps({ req }: { req: NextApiRequest}) {
+export async function getServerSideProps({ req }: { req: NextApiRequest }) {
   let products = [];
-  const { brand } = req.cookies;
+  const { brand = '' } = req.cookies;
 
   try {
     const host = `http://${req.headers.host}` || '';
@@ -65,6 +66,7 @@ export async function getServerSideProps({ req }: { req: NextApiRequest}) {
 
   return {
     props: {
+      brand,
       products,
       color: '#567030',
     }
