@@ -1,59 +1,62 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { BRANDS, isValidBrand } from '@lib/brand';
+import { NextRequest, NextResponse } from "next/server";
 
-import { COOKIE_NAME } from '@lib/constants';
-import { NextURL } from 'next/dist/server/web/next-url';
-
-export function getBrand(req: NextRequest) {
-  let override = req.nextUrl.searchParams.get(COOKIE_NAME) || req.cookies.get(COOKIE_NAME);
-
-  const host = req.headers.get('host') || '';
-  const brand = BRANDS.find((b) => host.includes(b));
-
-  if (brand) {
-    return brand;
-  }
-
-  if (isValidBrand(override)){
-    return override;
-  }
-
-  // Default to a brand which is not found, and the 404 page can tell you where to look
-  return 'sapin';
-}
-
-// See "Matching Paths" below to learn more
 export const config = {
-  /*
-   * Match all request paths except for the ones starting with:
-   * - api (API routes)
-   * - static (static files)
-   * - favicon.ico (favicon file)
-   */
-  matcher: '/((?!api|static|favicon.ico|_next).*)',
-}
+  matcher: [
+    /*
+     * Match all paths except for:
+     * 1. /api routes
+     * 2. /_next (Next.js internals)
+     * 3. /fonts (inside /public)
+     * 4. /examples (inside /public)
+     * 5. all root files inside /public (e.g. /favicon.ico)
+     */
+    "/((?!api|_next|fonts|examples|[\\w-]+\\.\\w+).*)",
+  ],
+};
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+export default function middleware(req: NextRequest) {
+  const url = req.nextUrl;
 
-  // Dont rewite the path for api routes
-  if (pathname.startsWith('/api')) {
-    return NextResponse.next();
+  // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
+  const hostname = req.headers.get("host") || "demo.vercel.pub";
+
+  // Only for demo purposes - remove this if you want to use your root domain as the landing page
+  if (hostname === "vercel.pub" || hostname === "platforms.vercel.app") {
+    return NextResponse.redirect("https://demo.vercel.pub");
   }
 
-  // Get the brand cookie
-  const brand = getBrand(req)
-  console.log('detected brand', brand)
-  const updatedUrl = new NextURL(req.nextUrl);
-  updatedUrl.pathname = `/${brand}${pathname}`;
-  // TODO this doesnt impact the query params (might have to use browser)
-  updatedUrl.searchParams.delete('brand');
-  const res = NextResponse.rewrite(updatedUrl)
+  /*  You have to replace ".vercel.pub" with your own domain if you deploy this example under your domain.
+      You can also use wildcard subdomains on .vercel.app links that are associated with your Vercel team slug
+      in this case, our team slug is "platformize", thus *.platformize.vercel.app works. Do note that you'll
+      still need to add "*.platformize.vercel.app" as a wildcard domain on your Vercel dashboard. */
+  const currentHost =
+    process.env.NODE_ENV === "production" && process.env.VERCEL === "1"
+      ? hostname
+          .replace(`.vercel.pub`, "")
+          .replace(`.platformize.vercel.app`, "")
+      : hostname.replace(`.localhost:3000`, "");
+  // rewrites for app pages
+  if (currentHost == "app") {
+    if (
+      url.pathname === "/login" &&
+      (req.cookies.get("next-auth.session-token") ||
+        req.cookies.get("__Secure-next-auth.session-token"))
+    ) {
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
 
-  // Add the brand to cookies if it's not there or it doesnt match the desired brand
-  if (!req.cookies.get(COOKIE_NAME) || req.cookies.get(COOKIE_NAME) !== brand) {
-    res.cookies.set(COOKIE_NAME, brand)
+    url.pathname = `/app${url.pathname}`;
+    return NextResponse.rewrite(url);
   }
 
-  return res;
+  // rewrite root application to `/home` folder
+  if (hostname === "localhost:3000" || hostname === "platformize.vercel.app") {
+    url.pathname = `/home${url.pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  // rewrite everything else to `/_sites/[site] dynamic route
+  url.pathname = `/_sites/${currentHost}${url.pathname}`;
+  return NextResponse.rewrite(url);
 }
