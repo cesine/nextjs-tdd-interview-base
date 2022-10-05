@@ -3,8 +3,11 @@ describe('home', () => {
   // Hydration failed because the initial UI does not match what was rendered on the server.
   // This will be resolved when we move to platforms so skipping the test for now
   it.skip("should render the home page and display a message", () => {
-    cy.setCookie('brand', 'chene');
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3000', {
+      headers: {
+        host: 'www.chene.com',
+      },
+    });
     cy.get("h2").contains("Home page");
     cy.get("body").contains("CHENE");
   });

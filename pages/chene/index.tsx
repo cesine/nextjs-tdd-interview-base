@@ -4,12 +4,11 @@ import { Skeleton } from '@mui/material';
 import { useProducts } from '@hooks/useProducts';
 
 type Props = {
+  brand: string;
   color: string;
 };
 
-
-export default function Home({ color }: Props) {
-  const brand = useBrand();
+export default function Home({ brand, color }: Props) {
   const { data: { products } = { products: []}, error } = useProducts();
   return (
     <Page>
@@ -32,6 +31,7 @@ Home.Layout = Layout;
 export async function getServerSideProps() {
   return {
     props: {
+      brand: 'chene',
       product: 'flooring',
       color: '#BB8141',
     }

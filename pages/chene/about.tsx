@@ -1,9 +1,6 @@
 import { Layout, Link, Page, Text } from '@vercel/examples-ui'
-import { useBrand } from '@hooks/useBrand';
 
-export default function About() {
-  const brand = useBrand();
-
+export default function About({ brand }: { brand: string }) {
   return (
     <Page>
       <Text variant="h2" className="mb-6">
@@ -23,5 +20,9 @@ About.Layout = Layout
 
 export async function getStaticProps() {
   // Here you would return data about the brand
-  return { props: {} }
+  return {
+    props: {
+      brand: 'chene'
+    }
+  }
 }

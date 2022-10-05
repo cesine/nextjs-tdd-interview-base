@@ -1,8 +1,19 @@
 import { Layout, Link, Page, Text } from '@vercel/examples-ui'
+import type { GetStaticProps } from "next";
 import { useBrand } from '@hooks/useBrand';
+import type { ParsedUrlQuery } from "querystring";
 
-export default function About() {
-  const brand = useBrand();
+interface Props {
+  brand: string;
+}
+
+interface PathProps extends ParsedUrlQuery {
+  site: string;
+  slug: string;
+}
+
+export default function About({ brand } : Props) {
+  // const brand = useBrand();
 
   return (
     <Page>
@@ -19,9 +30,15 @@ export default function About() {
   )
 }
 
-About.Layout = Layout
+export const getStaticProps: GetStaticProps<Props, PathProps> = async ({
+  params,
+}) => {
+  // if (!params) throw new Error("No path parameters found");
 
-export async function getStaticProps() {
+  console.log('params', params)
   // Here you would return data about the brand
-  return { props: {} }
+  return { props: {
+    brand: 'sapin',
+    // brand: params.site
+  } }
 }

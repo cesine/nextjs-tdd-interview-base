@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getBrand } from '@lib/brand';
 
 const products = [{
   id: '123-abc',
@@ -26,7 +27,8 @@ const products = [{
  * @docs https://nextjs.org/docs/api-routes/introduction
  */
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { brand } = req.cookies;
+  console.log('query', req.query)
+  const brand = req.query.brand || getBrand(req.headers.host);
 
   res.json({
     products: products.filter((product) => product.brand === brand)

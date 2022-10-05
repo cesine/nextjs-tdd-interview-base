@@ -20,8 +20,7 @@ describe('home', () => {
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
 
-    cy.setCookie('brand', 'palmier');
-    cy.visit('http://localhost:3000', { failOnStatusCode: false})
+    cy.visit('http://localhost:3000', { failOnStatusCode: false })
   })
 
   it("should render the 404 page and display the brand", () => {

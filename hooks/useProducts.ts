@@ -14,11 +14,8 @@ export type Data = {
 export const useProducts = (): SWRResponse<Data, Error> => {
   const brand = useBrand();
 
-  return useSWR('/api/products', (url: string) => {
+  return useSWR(`/api/products?${new URLSearchParams({ brand })}`, (url: string) => {
     return fetch(url, {
-      headers: {
-        cookie: `brand=${brand}`,
-      }
     }).then((res) => {
       console.log('done fetching')
       return res.json();

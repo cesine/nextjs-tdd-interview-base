@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { BRANDS, isValidBrand } from '@lib/brand';
+import { BRANDS, getBrand, isValidBrand } from '@lib/brand';
 
 export const config = {
   matcher: [
@@ -30,18 +30,7 @@ export default function middleware(req: NextRequest) {
       You can also use wildcard subdomains on .vercel.app links that are associated with your Vercel team slug
       in this case, our team slug is 'platformize', thus *.platformize.vercel.app works. Do note that you'll
       still need to add '*.platformize.vercel.app' as a wildcard domain on your Vercel dashboard. */
-  let currentHost =
-    hostname.includes('localhost')
-      ? hostname.replace(`.localhost:3000`, '')
-      : hostname
-          .replace(/www\.(.*)\.com/, '$1')
-          .replace(`.ferme.ca`, '')
-          .replace(`.platformize.vercel.app`, '')
-
-  if (!isValidBrand(currentHost)) {
-    console.warn(`${currentHost} is not a valid brand, overriding it to palmier`)
-    currentHost = 'palmier';
-  }
+  const currentHost = getBrand(hostname);
 
   // rewrites for chene pages
   if (currentHost === 'chene') {
