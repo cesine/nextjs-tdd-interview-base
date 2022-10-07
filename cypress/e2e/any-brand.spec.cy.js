@@ -1,4 +1,4 @@
-describe('home', () => {
+describe('any-brand', () => {
   it('should render the foo products when the host header is sent', () => {
     cy.visit('http://localhost:3000', {
       headers: {

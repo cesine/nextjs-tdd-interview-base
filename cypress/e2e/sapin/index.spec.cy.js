@@ -1,4 +1,4 @@
-describe('home', () => {
+describe('sapin', () => {
   it('should render the sapin products', () => {
     cy.visit('http://sapin.localhost:3000');
     cy.get('h2').contains('Home page');
