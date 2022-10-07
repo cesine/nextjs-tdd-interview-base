@@ -31,13 +31,8 @@ export default function middleware(req: NextRequest) {
       in this case, our team slug is 'platformize', thus *.platformize.vercel.app works. Do note that you'll
       still need to add '*.platformize.vercel.app' as a wildcard domain on your Vercel dashboard. */
   const currentHost = getBrand(hostname);
-  if (
-    url.pathname === '/login' &&
-    (req.cookies.get('next-auth.session-token') ||
-      req.cookies.get('__Secure-next-auth.session-token'))
-  ) {
-    url.pathname = '/';
-    return NextResponse.redirect(url);
+  if (!currentHost) {
+    return;
   }
 
   // rewrite everything else to `/_sites/[site] dynamic route

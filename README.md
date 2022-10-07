@@ -1,12 +1,12 @@
 # multi-brand example
 
-This example shows how to render multiple brands using a _middleware.
+This example shows how to render multiple brands using a middleware.
 
 ## Demo
 
-https://nextjs-tdd-interview-base.vercel.app/?brand=chene
+https://nextjs-tdd-interview-base.vercel.app/
 
-https://nextjs-tdd-interview-base.vercel.app/?brand=sapin
+https://nextjs-tdd-interview-base.vercel.app/
 
 You can also edit your /etc/hosts to view the brands based on the domain.
 
@@ -47,4 +47,15 @@ yarn
 yarn dev
 ```
 
+
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=edge-middleware-eap) ([Documentation](https://nextjs.org/docs/deployment)).
+
+
+## How to run tests
+
+Edit your /etc/hosts so that Cypress can find the hosts:
+
+```
+127.0.0.1 chene.localhost
+127.0.0.1 sapin.localhost
+```

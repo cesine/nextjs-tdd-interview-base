@@ -14,7 +14,7 @@ export type Data = {
 export const useProducts = (): SWRResponse<Data, Error> => {
   const brand = useBrand();
 
-  return useSWR(`/api/products?${new URLSearchParams({ brand })}`, (url: string) => {
+  return useSWR(brand ? `/api/products?${new URLSearchParams({ brand })}`: null, (url: string) => {
     return fetch(url, {
     }).then((res) => {
       console.log('done fetching')

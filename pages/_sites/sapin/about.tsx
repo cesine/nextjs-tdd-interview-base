@@ -13,8 +13,6 @@ interface PathProps extends ParsedUrlQuery {
 }
 
 export default function About({ brand }: Props) {
-  // const brand = useBrand();
-
   return (
     <Page>
       <Text variant="h2" className="mb-6">

@@ -20,7 +20,9 @@ export default function Home({ brand, color }: Props) {
       </Text>
       <Text className="text-lg mb-4">
         Welcome to {brand ? <b>{brand.toUpperCase()}</b> : <Skeleton variant="text" width="20"/>}&nbsp;
-        {error ? error.message : products.map(({name}) => name).join(', ')}
+        <span data-automation="products">
+          {error ? error.message : products.map(({name}) => name).join(', ')}
+        </span>
       </Text>
     </Page>
   )
