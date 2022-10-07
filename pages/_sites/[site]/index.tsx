@@ -1,7 +1,12 @@
+import type { NextApiRequest } from 'next'
 import Head from 'next/head'
 import { Layout, Text, Page, Link } from '@vercel/examples-ui'
 
-function Home() {
+type Props = {
+  host: string;
+};
+
+function Home({ host }: Props) {
   return (
     <Page>
       <Head>
@@ -21,9 +26,9 @@ function Home() {
           Delete the pages/_middleware.ts file to be able to view the original page directory structure.
         </Text>
 
-        <Link href='/chene'>Chêne</Link>
-        <Link href='/sapin'>Sapin</Link>
-        <Link href='/palmier'>Palmier</Link>
+        <Link href={`http://chene.${host}`}>Chêne</Link>
+        <Link href={`http://sapin.${host}`}>Sapin</Link>
+        <Link href={`http://palmier.${host}`}>Palmier</Link>
 
       </section>
 
@@ -35,3 +40,14 @@ function Home() {
 Home.Layout = Layout
 
 export default Home
+
+export async function getServerSideProps({ req }: { req: NextApiRequest }) {
+  const { host } = req.headers;
+
+  return {
+    props: {
+      host,
+    }
+  }
+}
+
