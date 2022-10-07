@@ -1,6 +1,6 @@
 
 
-/// <reference types="cypress" />
+/// <reference types='cypress' />
 
 // Welcome to Cypress!
 //
@@ -14,14 +14,14 @@
 // https://on.cypress.io/introduction-to-cypress
 
 describe('home', () => {
-  it("should render the 404 page and display the brand", () => {
+  it('should render the 404 page and display the brand', () => {
     // Cypress starts out with a blank slate for each test
     // so we must tell it to visit our website with the `cy.visit()` command.
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
 
     cy.visit('http://localhost:3000/foo', { failOnStatusCode: false })
-    cy.get("h1").contains("Not Found");
-    cy.get("body").contains("PALMIER");
+    cy.get('h1').contains('Not Found');
+    cy.get('body').contains('PALMIER');
   });
 })

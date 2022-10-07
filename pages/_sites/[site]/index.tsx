@@ -41,7 +41,7 @@ Home.Layout = Layout
 
 export default Home
 
-export async function getServerSideProps({ req }: { req: NextApiRequest }) {
+export async function getServerSideProps({ req } : { req: NextApiRequest }) {
   const { host } = req.headers;
 
   return {

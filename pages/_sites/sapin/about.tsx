@@ -1,7 +1,7 @@
 import { Layout, Link, Page, Text } from '@vercel/examples-ui'
-import type { GetStaticProps } from "next";
+import type { GetStaticProps } from 'next';
 import { useBrand } from '@hooks/useBrand';
-import type { ParsedUrlQuery } from "querystring";
+import type { ParsedUrlQuery } from 'querystring';
 
 interface Props {
   brand: string;
@@ -12,7 +12,7 @@ interface PathProps extends ParsedUrlQuery {
   slug: string;
 }
 
-export default function About({ brand } : Props) {
+export default function About({ brand }: Props) {
   // const brand = useBrand();
 
   return (
