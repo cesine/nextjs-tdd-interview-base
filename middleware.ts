@@ -31,44 +31,17 @@ export default function middleware(req: NextRequest) {
       in this case, our team slug is 'platformize', thus *.platformize.vercel.app works. Do note that you'll
       still need to add '*.platformize.vercel.app' as a wildcard domain on your Vercel dashboard. */
   const currentHost = getBrand(hostname);
-
-  // rewrites for chene pages
-  if (currentHost === 'chene') {
-    if (
-      url.pathname === '/login' &&
-      (req.cookies.get('next-auth.session-token') ||
-        req.cookies.get('__Secure-next-auth.session-token'))
-    ) {
-      url.pathname = '/';
-      return NextResponse.redirect(url);
-    }
-
-    url.pathname = `/chene${url.pathname}`;
-    return NextResponse.rewrite(url);
-  }
-
-  // rewrites for sapin pages?
-  if (currentHost === 'sapin') {
-    if (
-      url.pathname === '/login' &&
-      (req.cookies.get('next-auth.session-token') ||
-        req.cookies.get('__Secure-next-auth.session-token'))
-    ) {
-      url.pathname = '/';
-      return NextResponse.redirect(url);
-    }
-
-    url.pathname = `/sapin${url.pathname}`;
-    return NextResponse.rewrite(url);
-  }
-
-  // rewrite root application to `/home` folder
-  if (hostname === 'localhost:3000' || hostname === 'platformize.vercel.app') {
-    url.pathname = `/home${url.pathname}`;
-    return NextResponse.rewrite(url);
+  if (
+    url.pathname === '/login' &&
+    (req.cookies.get('next-auth.session-token') ||
+      req.cookies.get('__Secure-next-auth.session-token'))
+  ) {
+    url.pathname = '/';
+    return NextResponse.redirect(url);
   }
 
   // rewrite everything else to `/_sites/[site] dynamic route
   url.pathname = `/_sites/${currentHost}${url.pathname}`;
+  console.log('rewriting the url ', url.pathname)
   return NextResponse.rewrite(url);
 }

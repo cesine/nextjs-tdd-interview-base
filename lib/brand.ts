@@ -11,8 +11,8 @@ export function getBrand (hostname = '') :  string {
 
   if (!currentHost || !isValidBrand(currentHost)) {
     // TODO cant use palmier because it is a 404 which prevents cypress from starting
-    console.warn(`${currentHost} is not a valid brand, overriding it to sapin`)
-    currentHost = 'sapin';
+    console.warn(`${currentHost} is not a valid brand, overriding it to palmier`)
+    currentHost = 'palmier';
   }
 
   return currentHost;
