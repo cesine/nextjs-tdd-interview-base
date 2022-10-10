@@ -4,7 +4,7 @@ describe('home', () => {
   // This will be resolved when we move to platforms so skipping the test for now
   it('should render chene products on the client side', () => {
     cy.visit('http://chene.localhost:3000/about');
-    cy.get('h2').contains('Home page');
+    cy.get('h2').contains('About brand');
     cy.get('body').contains('CHENE');
   });
 
@@ -14,7 +14,7 @@ describe('home', () => {
         host: 'www.chene.com',
       },
     });
-    cy.get('h2').contains('Home page');
+    cy.get('h2').contains('About brand');
     cy.get('body').contains('CHENE');
   });
 });
