@@ -1,10 +1,10 @@
 import useSWR, { SWRResponse } from 'swr'
-import { useBrand } from './useBrand';
+import { useSite } from './useSite';
 
 type Product = {
   id: string;
   name: string;
-  brand: string;
+  site: string;
 };
 
 export type Data = {
@@ -12,13 +12,10 @@ export type Data = {
 };
 
 export const useProducts = (): SWRResponse<Data, Error> => {
-  const brand = useBrand();
+  const site = useSite();
 
-  return useSWR('/api/products', (url: string) => {
+  return useSWR(site ? `/api/products?${new URLSearchParams({ site })}`: null, (url: string) => {
     return fetch(url, {
-      headers: {
-        cookie: `brand=${brand}`,
-      }
     }).then((res) => {
       console.log('done fetching')
       return res.json();

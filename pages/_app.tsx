@@ -9,7 +9,7 @@ function App({ Component, pageProps }: AppProps) {
   const Layout = getLayout<LayoutProps>(Component)
 
   return (
-    <Layout title="multi-brand" path="edge-functions/multi-brand">
+    <Layout title="multi-site" path="edge-functions/multi-site">
       <Component {...pageProps} />
     </Layout>
   )

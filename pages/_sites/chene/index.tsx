@@ -1,15 +1,14 @@
 import { Layout, Link, Page, Text } from '@vercel/examples-ui'
-import { useBrand } from '@hooks/useBrand';
+import { useSite } from '@hooks/useSite';
 import { Skeleton } from '@mui/material';
 import { useProducts } from '@hooks/useProducts';
 
 type Props = {
+  site: string;
   color: string;
 };
 
-
-export default function Home({ color }: Props) {
-  const brand = useBrand();
+export default function Home({ site, color }: Props) {
   const { data: { products } = { products: []}, error } = useProducts();
   return (
     <Page>
@@ -20,8 +19,10 @@ export default function Home({ color }: Props) {
         <Link href='/about'>About</Link> us
       </Text>
       <Text className="text-lg mb-4">
-        Welcome to {brand ? <b>{brand.toUpperCase()}</b> : <Skeleton variant="text" width="20"/>}&nbsp;
-        {error ? error.message : products.map(({name}) => name).join(', ')}
+        Welcome to {site ? <b>{site.toUpperCase()}</b> : <Skeleton variant="text" width="20"/>}&nbsp;
+        <span data-automation="products">
+          {error ? error.message : products.map(({name}) => name).join(', ')}
+        </span>
       </Text>
     </Page>
   )
@@ -32,6 +33,7 @@ Home.Layout = Layout;
 export async function getServerSideProps() {
   return {
     props: {
+      site: 'chene',
       product: 'flooring',
       color: '#BB8141',
     }
