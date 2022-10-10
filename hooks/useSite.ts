@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { getBrand } from '@lib/brand';
+import { getSite } from '@lib/site';
 
-export const useBrand = () => {
-  const [brand, setBrand] = useState<string | undefined>();
+export const useSite = () => {
+  const [site, setSite] = useState<string | undefined>();
   const router = useRouter();
 
   useEffect(() => {
@@ -11,13 +11,13 @@ export const useBrand = () => {
     console.log('router.asPath', router);
 
     // This doesnt work for files that are not overwridden
-    // const brandFromPath = router.route
+    // const siteFromPath = router.route
     //       .replace(/\/_sites\/([^/]*).*/, '$1')
-    // setBrand(brandFromPath);
+    // setSite(siteFromPath);
 
-    const brandFromLocation = getBrand(host);
-    setBrand(brandFromLocation)
-  }, [brand, router]);
+    const siteFromLocation = getSite(host);
+    setSite(siteFromLocation)
+  }, [site, router]);
 
-  return brand;
+  return site;
 }

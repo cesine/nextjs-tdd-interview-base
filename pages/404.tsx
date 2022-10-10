@@ -1,12 +1,11 @@
-import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { Layout, Link, Page, Text, Button } from '@vercel/examples-ui'
-import { useBrand } from '@hooks/useBrand';
-import { BRANDS } from '@lib/brand';
+import { useSite } from '@hooks/useSite';
+import { SITES } from '@lib/site';
 
 export default function Custom404() {
-  const brand = useBrand();
+  const site = useSite();
 
   return (
     <Page>
@@ -14,34 +13,34 @@ export default function Custom404() {
         <title>Not Found</title>
         <meta
           name="description"
-          content="Vercel example how to use multi-brand custom not found"
+          content="Vercel example how to use multi-site custom not found"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="flex flex-col gap-6">
-        <Text variant="h1">404 - {brand?.toUpperCase() ?? ''} Not Found</Text>
-        <Text>You can use a query parameter to view one of the avilable brands:</Text>
+        <Text variant="h1">404 - {site?.toUpperCase() ?? ''} Not Found</Text>
+        <Text>You can use a query parameter to view one of the avilable sites:</Text>
 
         <Text className="text-lg mb-4">
-          <Link as='/' href='/chene?brand=chene'>Chene</Link>
+          <Link as='/' href='/chene?site=chene'>Chene</Link>
         </Text>
         <Text className="text-lg mb-4">
-          <Link href='/?brand=sapin'>Sapin</Link>
+          <Link href='/?site=sapin'>Sapin</Link>
         </Text>
 
         <Text className="mb-4">
-        Or you can use the buttons below to change your assigned brand cookie and refresh
+        Or you can use the buttons below to navigate to a different site
         the page:
       </Text>
-      {BRANDS.map((brand) => (
+      {SITES.map((site) => (
         <Button
           Component={Link}
-          href={`http://${brand}.localhost:3000`}
-          key={brand}
+          href={`http://${site}.localhost:3000`}
+          key={site}
           style={{ marginRight: '0.625rem' }}
           variant="secondary"
         >
-          Brand {brand.toUpperCase()}
+          Site {site.toUpperCase()}
         </Button>
       ))}
       <Button
@@ -49,7 +48,7 @@ export default function Custom404() {
         href={`http://localhost:3000`}
         variant="black"
       >
-        Remove brand
+        Remove site
       </Button>
 
       </section>

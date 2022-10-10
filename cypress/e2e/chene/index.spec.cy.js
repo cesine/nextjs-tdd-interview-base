@@ -1,4 +1,4 @@
-describe('home', () => {
+describe('chene', () => {
   // TODO updating to react 18 exposed a bug
   // Hydration failed because the initial UI does not match what was rendered on the server.
   // This will be resolved when we move to platforms so skipping the test for now

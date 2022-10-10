@@ -1,25 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getBrand } from '@lib/brand';
+import { getSite } from '@lib/site';
 
 const products = [{
   id: '123-abc',
   name: '2in flooring',
-  brand: 'chene',
+  site: 'chene',
   thumbnail: 'https://image.shutterstock.com/image-photo/-260nw-731352850.jpg'
 }, {
   id: '456-efg',
   name: 'spruce',
-  brand: 'sapin',
+  site: 'sapin',
   thumbnail: 'https://image.shutterstock.com/image-photo/-260nw-1932235397.jpg'
 }, {
   id: '567-ihj',
   name: 'fur',
-  brand: 'sapin',
+  site: 'sapin',
   thumbnail: 'https://image.shutterstock.com/image-photo/-260nw-41031721.jpg'
 }, {
   id: '789-hjk',
   name: 'Date Palm',
-  brand: 'palmier',
+  site: 'palmier',
   thumbnail: 'https://image.shutterstock.com/image-photo/-260nw-563268664.jpg'
 }];
 
@@ -28,9 +28,9 @@ const products = [{
  */
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('query', req.query)
-  const brand = req.query.brand || getBrand(req.headers.host);
+  const site = req.query.site || getSite(req.headers.host);
 
   res.json({
-    products: products.filter((product) => product.brand === brand)
+    products: products.filter((product) => product.site === site)
   })
 }

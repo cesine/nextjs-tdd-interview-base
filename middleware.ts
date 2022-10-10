@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { BRANDS, getBrand, isValidBrand } from '@lib/brand';
+import { SITES, getSite, isValidSite } from '@lib/site';
 
 export const config = {
   matcher: [
@@ -30,7 +30,7 @@ export default function middleware(req: NextRequest) {
       You can also use wildcard subdomains on .vercel.app links that are associated with your Vercel team slug
       in this case, our team slug is 'platformize', thus *.platformize.vercel.app works. Do note that you'll
       still need to add '*.platformize.vercel.app' as a wildcard domain on your Vercel dashboard. */
-  const currentHost = getBrand(hostname);
+  const currentHost = getSite(hostname);
   if (!currentHost) {
     return;
   }

@@ -1,6 +1,6 @@
-# multi-brand example
+# multi-site example
 
-This example shows how to render multiple brands using a middleware.
+This example shows how to render multiple sites using a middleware.
 
 ## Demo
 
@@ -8,7 +8,7 @@ https://nextjs-tdd-interview-base.vercel.app/
 
 https://nextjs-tdd-interview-base.vercel.app/
 
-You can also edit your /etc/hosts to view the brands based on the domain.
+You can also edit your /etc/hosts to view the sites based on the domain.
 
 ```
 127.0.0.1 www.chene.com
@@ -23,16 +23,16 @@ You can choose from one of the following two methods to use this repository:
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/examples/tree/main/edge-functions/multi-brand&project-name=multi-brand&repository-name=multi-brand
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/examples/tree/main/edge-functions/multi-site&project-name=multi-site&repository-name=multi-site
 
 ### Clone and Deploy
 
 Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
 
 ```bash
-npx create-next-app --example https://github.com/vercel/examples/tree/main/edge-functions/multi-brand
+npx create-next-app --example https://github.com/vercel/examples/tree/main/edge-functions/multi-site
 # or
-yarn create next-app --example https://github.com/vercel/examples/tree/main/edge-functions/multi-brand
+yarn create next-app --example https://github.com/vercel/examples/tree/main/edge-functions/multi-site
 ```
 
 Next, run Next.js in development mode:

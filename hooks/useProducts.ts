@@ -1,10 +1,10 @@
 import useSWR, { SWRResponse } from 'swr'
-import { useBrand } from './useBrand';
+import { useSite } from './useSite';
 
 type Product = {
   id: string;
   name: string;
-  brand: string;
+  site: string;
 };
 
 export type Data = {
@@ -12,9 +12,9 @@ export type Data = {
 };
 
 export const useProducts = (): SWRResponse<Data, Error> => {
-  const brand = useBrand();
+  const site = useSite();
 
-  return useSWR(brand ? `/api/products?${new URLSearchParams({ brand })}`: null, (url: string) => {
+  return useSWR(site ? `/api/products?${new URLSearchParams({ site })}`: null, (url: string) => {
     return fetch(url, {
     }).then((res) => {
       console.log('done fetching')

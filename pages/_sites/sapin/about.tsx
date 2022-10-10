@@ -1,22 +1,21 @@
 import { Layout, Link, Page, Text } from '@vercel/examples-ui'
 import type { GetStaticProps } from 'next';
-import { useBrand } from '@hooks/useBrand';
+import { useSite } from '@hooks/useSite';
 import type { ParsedUrlQuery } from 'querystring';
 
 interface Props {
-  brand: string;
+  site: string;
 }
 
 interface PathProps extends ParsedUrlQuery {
   site: string;
-  slug: string;
 }
 
-export default function About({ brand }: Props) {
+export default function About({ site }: Props) {
   return (
     <Page>
       <Text variant="h2" className="mb-6">
-        About <b>brand {brand.toUpperCase()}</b>
+        About <b>site {site.toUpperCase()}</b>
       </Text>
       <Text className="text-lg mb-4">
         Our balsam fir are popular Christmas trees, with aromatic foliage that does not shed many needles on drying out.
@@ -34,9 +33,9 @@ export const getStaticProps: GetStaticProps<Props, PathProps> = async ({
   // if (!params) throw new Error("No path parameters found");
 
   console.log('params', params)
-  // Here you would return data about the brand
+  // Here you would return data about the site
   return { props: {
-    brand: 'sapin',
-    // brand: params.site
+    site: 'sapin',
+    // site: params.site
   } }
 }
