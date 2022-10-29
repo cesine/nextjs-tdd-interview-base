@@ -9,7 +9,6 @@ import { SITES } from '@lib/site';
 export default function Custom404() {
   const site = useSite();
 
-
   return (
     <Page>
       <Head>
