@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { NextApiRequest } from 'next'
-import { Page, Text } from '@vercel/examples-ui'
+import Typography from '@mui/material/Typography';
+import { Page } from '@vercel/examples-ui'
 import { getSite } from '@lib/site';
 
 type Product = {
@@ -17,19 +18,19 @@ type Props = {
 export default function Home({ site, color, products }: Props) {
   return (
     <Page>
-      <Text variant="h2" className="mb-6" style={{ color }}>
-        Home page
-      </Text>
-      <Text className="text-lg mb-4">
+      <Typography variant="h1" className="mb-6" style={{ color }}>
+        {site.toUpperCase()}
+      </Typography>
+      <Typography className="text-lg mb-4">
         You&apos;re currently visiting the <b>site {site.toUpperCase()}</b> <span data-automation="products">{products.map(({name}) => name).join(', ')}</span> website.
-      </Text>
-      <Text className="mb-4">
+      </Typography>
+      <Typography className="mb-4">
         You can use the buttons below to change your assigned site and refresh
         the page:
-      </Text>
-      <Text className="text-bold mb-4">
+      </Typography>
+      <Typography className="text-bold mb-4">
         <Link href="/about">About</Link>
-      </Text>
+      </Typography>
     </Page>
   )
 }
