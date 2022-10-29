@@ -1,5 +1,6 @@
+import Link from 'next/link'
 import type { NextApiRequest } from 'next'
-import { Layout, Link, Page, Text } from '@vercel/examples-ui'
+import { Page, Text } from '@vercel/examples-ui'
 import { getSite } from '@lib/site';
 
 type Product = {
@@ -32,8 +33,6 @@ export default function Home({ site, color, products }: Props) {
     </Page>
   )
 }
-
-Home.Layout = Layout
 
 export async function getServerSideProps({ req }: { req: NextApiRequest }) {
   const site = 'sapin';

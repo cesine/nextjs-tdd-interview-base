@@ -1,4 +1,5 @@
-import { Layout, Link, Page, Text } from '@vercel/examples-ui'
+import Link from 'next/link'
+import { Page, Text } from '@vercel/examples-ui'
 import type { GetStaticProps } from 'next';
 import { useSite } from '@hooks/useSite';
 import type { ParsedUrlQuery } from 'querystring';
@@ -36,6 +37,7 @@ export const getStaticProps: GetStaticProps<Props, PathProps> = async ({
   // Here you would return data about the site
   return { props: {
     site: 'sapin',
+    title: 'Sapin',
     // site: params.site
   } }
 }
