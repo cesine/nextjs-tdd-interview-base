@@ -1,4 +1,5 @@
-import { Layout, Link, Page, Text } from '@vercel/examples-ui'
+import Link from 'next/link'
+import { Page, Text } from '@vercel/examples-ui'
 
 export default function About({ site }: { site: string }) {
   return (
@@ -15,8 +16,6 @@ export default function About({ site }: { site: string }) {
     </Page>
   )
 }
-
-About.Layout = Layout
 
 export async function getStaticProps() {
   // Here you would return data about the site

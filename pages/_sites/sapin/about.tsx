@@ -1,4 +1,5 @@
-import { Layout, Link, Page, Text } from '@vercel/examples-ui'
+import Link from 'next/link'
+import { Page, Text } from '@vercel/examples-ui'
 import type { GetStaticProps } from 'next';
 import { useSite } from '@hooks/useSite';
 import type { ParsedUrlQuery } from 'querystring';

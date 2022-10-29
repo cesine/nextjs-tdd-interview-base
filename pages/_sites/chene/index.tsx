@@ -1,4 +1,5 @@
-import { Layout, Link, Page, Text } from '@vercel/examples-ui'
+import Link from 'next/link'
+import {  Page, Text } from '@vercel/examples-ui'
 import { useSite } from '@hooks/useSite';
 import { Skeleton } from '@mui/material';
 import { useProducts } from '@hooks/useProducts';
@@ -27,8 +28,6 @@ export default function Home({ site, color }: Props) {
     </Page>
   )
 }
-
-Home.Layout = Layout;
 
 export async function getServerSideProps() {
   return {

@@ -1,6 +1,7 @@
 import type { NextApiRequest } from 'next'
 import Head from 'next/head'
-import { Layout, Text, Page, Link } from '@vercel/examples-ui'
+import Link from 'next/link'
+import { Text, Page } from '@vercel/examples-ui'
 import { useSite } from '@hooks/useSite';
 import { useProducts } from '@hooks/useProducts';
 
@@ -51,8 +52,6 @@ function Home({ host }: Props) {
     </Page>
   )
 }
-
-Home.Layout = Layout
 
 export default Home
 

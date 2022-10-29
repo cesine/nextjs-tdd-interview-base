@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { Layout, Link, Page, Text, Button } from '@vercel/examples-ui'
+import Link from 'next/link'
+import { Page, Text, Button } from '@vercel/examples-ui'
 import { useSite } from '@hooks/useSite';
 import { SITES } from '@lib/site';
 
@@ -55,6 +56,3 @@ export default function Custom404() {
     </Page>
   );
 }
-
-
-Custom404.Layout = Layout;
