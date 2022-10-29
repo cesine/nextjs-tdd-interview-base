@@ -65,9 +65,11 @@ export async function getServerSideProps({ req }: { req: NextApiRequest }) {
 
   return {
     props: {
-      site,
-      products,
       color: '#567030',
+      description: 'We offer the finest christmas trees delivered to you!',
+      products,
+      site,
+      title: 'Buy Sapin Christmas Trees',
     }
   }
 }
