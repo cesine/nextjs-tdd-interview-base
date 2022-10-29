@@ -37,7 +37,6 @@ export const getStaticProps: GetStaticProps<Props, PathProps> = async ({
   // Here you would return data about the site
   return { props: {
     site: 'sapin',
-    title: 'Sapin',
     // site: params.site
   } }
 }
