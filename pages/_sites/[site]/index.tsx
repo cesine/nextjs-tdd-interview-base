@@ -1,7 +1,8 @@
 import type { NextApiRequest } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Text, Page } from '@vercel/examples-ui'
+import Typography from '@mui/material/Typography';
+import { Page } from '@vercel/examples-ui'
 import { useSite } from '@hooks/useSite';
 import { useProducts } from '@hooks/useProducts';
 
@@ -25,21 +26,21 @@ function Home({ host }: Props) {
       </Head>
 
       <section className="flex flex-col gap-6">
-        <Text variant="h1">multi-site usage example</Text>
-        <Text>
+        <Typography variant="h1">multi-site usage example</Typography>
+        <Typography>
           This example shows to use a middleware to rewrite paths so that the user doesnt now the full path to a given site.
 
           Delete the middleware.ts file to be able to view the original page directory structure.
-        </Text>
+        </Typography>
 
-        <Text variant="h2">Current site: {site}</Text>
+        <Typography variant="h2">Current site: {site}</Typography>
         {products.length
           ? <ul data-automation="products">
             {products.map(({name}) => (<li key={name}>{name}</li>))}
           </ul>
         : null }
 
-        <Text variant="h2">Visit our sites</Text>
+        <Typography variant="h2">Visit our sites</Typography>
 
         <footer className="border-t border-accents-2 my-6" style={{ display: 'flex', justifyContent: 'space-around' }}>
           <Link href={`http://chene.${host}`}>Chêne</Link>

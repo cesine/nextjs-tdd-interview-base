@@ -30,7 +30,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('query', req.query)
   const site = req.query.site || getSite(req.headers.host);
 
-  res.json({
-    products: products.filter((product) => product.site === site)
-  })
+  // simulate a slow look up
+  setTimeout(() => {
+    res.json({
+      products: products.filter((product) => product.site === site)
+    })
+  }, 2000);
 }

@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import {  Page, Text } from '@vercel/examples-ui'
+import Typography from '@mui/material/Typography';
+import {  Page } from '@vercel/examples-ui'
 import { useSite } from '@hooks/useSite';
-import { Skeleton } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 import { useProducts } from '@hooks/useProducts';
 
 type Props = {
@@ -10,21 +11,21 @@ type Props = {
 };
 
 export default function Home({ site, color }: Props) {
-  const { data: { products } = { products: []}, error } = useProducts();
+  const { data: { products } = {}, error } = useProducts();
   return (
     <Page>
-      <Text variant="h2" className="mb-6" style={{ color }}>
+      <Typography variant="h2" className="mb-6" style={{ color }}>
         Home page
-      </Text>
-      <Text className="text-lg mb-4">
+      </Typography>
+      <Typography className="text-lg mb-4">
         <Link href='/about'>About</Link> us
-      </Text>
-      <Text className="text-lg mb-4">
-        Welcome to {site ? <b>{site.toUpperCase()}</b> : <Skeleton variant="text" width="20"/>}&nbsp;
-        <span data-automation="products">
+      </Typography>
+      <Typography className="text-lg mb-4">
+        Welcome to {site ? <b>{site.toUpperCase()}</b> : <Skeleton variant="text" width="20" />}&nbsp;
+        {products ? <span data-automation="products">
           {error ? error.message : products.map(({name}) => name).join(', ')}
-        </span>
-      </Text>
+        </span> : <Skeleton variant="text" width="30" />}
+      </Typography>
     </Page>
   )
 }

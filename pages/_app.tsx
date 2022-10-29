@@ -1,17 +1,21 @@
 import type { AppProps } from 'next/app'
-import type { LayoutProps } from '@vercel/examples-ui/layout'
-
-import { getLayout } from '@vercel/examples-ui'
+import Head from 'next/head.js'
+import packageInfo  from '../package.json'
 
 import '@vercel/examples-ui/globals.css'
 
 function App({ Component, pageProps }: AppProps) {
-  const Layout = getLayout<LayoutProps>(Component)
+  const { description = packageInfo.description, title = packageInfo.name } = pageProps;
 
   return (
-    <Layout title="multi-site" path="edge-functions/multi-site">
+    <div>
+      <Head>
+        {title && <title>{`${title} - Vercel Examples`}</title>}
+        {description && <meta name="description" content={description} />}
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Component {...pageProps} />
-    </Layout>
+    </div>
   )
 }
 
