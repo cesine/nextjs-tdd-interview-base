@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Typography from '@mui/material/Typography';
 import {  Page } from '@vercel/examples-ui'
 import { useSite } from '@hooks/useSite';
-import { Skeleton } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 import { useProducts } from '@hooks/useProducts';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function Home({ site, color }: Props) {
-  const { data: { products } = { products: []}, error } = useProducts();
+  const { data: { products } = {}, error } = useProducts();
   return (
     <Page>
       <Typography variant="h2" className="mb-6" style={{ color }}>
@@ -21,10 +21,10 @@ export default function Home({ site, color }: Props) {
         <Link href='/about'>About</Link> us
       </Typography>
       <Typography className="text-lg mb-4">
-        Welcome to {site ? <b>{site.toUpperCase()}</b> : <Skeleton variant="text" width="20"/>}&nbsp;
-        <span data-automation="products">
+        Welcome to {site ? <b>{site.toUpperCase()}</b> : <Skeleton variant="text" width="20" />}&nbsp;
+        {products ? <span data-automation="products">
           {error ? error.message : products.map(({name}) => name).join(', ')}
-        </span>
+        </span> : <Skeleton variant="text" width="30" />}
       </Typography>
     </Page>
   )
