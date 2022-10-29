@@ -1,7 +1,8 @@
 describe('sapin', () => {
   it('should render the sapin products', () => {
     cy.visit('http://sapin.localhost:3000');
-    cy.get('h2').contains('Home page');
+    cy.get('title').contains('Sapin Christmas Trees');
+    cy.get('h1').contains('SAPIN');
     cy.get('body').contains('SAPIN');
     cy.get('[data-automation=products]').contains('spruce');
   });
@@ -12,7 +13,7 @@ describe('sapin', () => {
         host: 'www.sapin.com',
       },
     });
-    cy.get('h2').contains('Home page');
+    cy.get('h1').contains('SAPIN');
     cy.get('body').contains('SAPIN');
     cy.get('[data-automation=products]').contains('spruce');
   });
