@@ -35,7 +35,7 @@ export default function Home({ site, color, products }: Props) {
   )
 }
 
-export async function getServerSideProps({ req }: { req: NextApiRequest }) {
+export async function getServerSideProps({ req, res }: { req: NextApiRequest }) {
   const site = 'sapin';
   let products = [];
   try {
@@ -62,7 +62,7 @@ export async function getServerSideProps({ req }: { req: NextApiRequest }) {
     }
     products = [e.status];
   }
-
+  res.setHeader('Cache-Control', 'max-age=900');
 
   return {
     props: {
